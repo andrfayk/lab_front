@@ -1,2 +1,3 @@
 <template>
+  стаощмтшк
 </template>
