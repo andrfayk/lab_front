@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+@layer base {
+    html {
+        font-family: Roboto, ui-sans-serif, system-ui, sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    .font-heading {
+        font-family: Montserrat, ui-sans-serif, system-ui, sans-serif;
+    }
+
+    .font-text {
+        font-family: Roboto, ui-sans-serif, system-ui, sans-serif;
+    }
+}
+
+@theme {
+    --color-primary: #AFF1FE;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
