@@ -9,7 +9,7 @@
         >
             <div
                 v-for="(photo, idx) in photos"
-                :key="photo.id"
+                :key="photo.idx"
                 :ref="(el) => (slideRefs[idx] = el as HTMLDivElement)"
                 @click="openModal(idx)"
                 class="group cursor-pointer relative bg-[url(assets/images/bg.png)] flex items-center justify-center bg-[length:40px] bg-repeat min-w-full snap-start"
@@ -120,11 +120,10 @@
 
 <script setup lang="ts">
 import {ref, computed, watch, nextTick, onMounted, onBeforeUnmount} from 'vue'
-import type {Photo} from '~/types/photo'
 import {ChevronLeftIcon, ChevronRightIcon, XMarkIcon} from '@heroicons/vue/24/outline'
 
 type Props = {
-    photos: Photo[]
+    photos: Array<{ id: number; name: string }>
 }
 
 const props = defineProps<Props>()
@@ -218,6 +217,11 @@ function handleKeydown(e: KeyboardEvent) {
     }
 }
 
+watch(isModalOpen, () => {
+    if (isModalOpen.value) document.body.style.overflow = "hidden"
+    else document.body.style.overflow = "auto"
+})
+
 function addKeyListeners() {
     window.addEventListener('keydown', handleKeydown)
 }
@@ -255,10 +259,17 @@ function onCarouselScroll() {
 
 const showActions = ref(false)
 
+const timeout = ref()
 const onShowActions = () => {
-    showActions.value = true
-    setTimeout(() => showActions.value = false, 3000)
+    showActions.value = !showActions.value
+    if (showActions.value) {
+        timeout.value = setTimeout(() => showActions.value = false, 3000)
+    }
 }
+
+watch(showActions, () => {
+    if (!showActions.value && timeout.value) clearTimeout(timeout.value)
+})
 
 </script>
 

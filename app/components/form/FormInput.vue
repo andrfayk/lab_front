@@ -11,7 +11,7 @@
         />
         <span
             v-if="error"
-            class="text-red-400 left-2 -bottom-[15px] absolute text-xs select-none"
+            class="text-red-400 left-2 -bottom-[15px] absolute text-[11px] select-none"
         >
       {{ error }}
     </span>

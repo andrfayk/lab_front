@@ -1,2 +1,8 @@
 User-Agent: *
 Disallow:
+
+# Preferred host
+Host: profitlab77.ru
+
+# Sitemap location (nuxt-simple-sitemap default)
+Sitemap: https://profitlab77.ru/sitemap.xml
